@@ -5,4 +5,5 @@ from app.main import app
 
 @pytest.fixture
 def client():
-    return TestClient(app)
+    with TestClient(app) as c:
+        yield c
