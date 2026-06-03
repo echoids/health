@@ -1,10 +1,10 @@
+from app.common.response import success, fail
+
+
 def test_health(client):
     resp = client.get("/health")
     assert resp.status_code == 200
     assert resp.json() == {"status": "ok"}
-
-
-from app.common.response import success, fail
 
 
 def test_success_response():
