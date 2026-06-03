@@ -45,3 +45,10 @@
 1. 读本文件了解进度
 2. `git checkout feature/foundation`
 3. 打开计划文档，从第一个未勾选的 Task 继续
+
+### 接续点（最近一次中断）
+
+- **下一步：执行 Task 1（统一响应与异常处理）**，计划文档已含完整代码与步骤。
+- 执行方式：子代理驱动。每个 Task 流程 = 派实现子代理 → 规格审查 → 代码质量审查 → 修复 → 标记完成 → 更新本文件。
+- 环境：venv 在 `backend/.venv`，跑测试用 `backend/.venv/Scripts/python.exe -m pytest tests/ -v`（在 backend/ 目录下）。
+- 中断原因：API 用量上限（重置后直接从 Task 1 继续即可）。
