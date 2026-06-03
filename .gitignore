@@ -1,0 +1,32 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Node / Taro
+node_modules/
+dist/
+.temp/
+.cache/
+
+# 环境变量与密钥
+.env
+.env.*
+!.env.example
+
+# 日志与临时文件
+*.log
+.DS_Store
+
+# Superpowers 浏览器伴侣
+.superpowers/
