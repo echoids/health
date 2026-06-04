@@ -1,7 +1,5 @@
 from app.modules.user import service
 from app.modules.user.models import User
-from app.modules.user.schemas import LoginRequest
-from app.common.auth import get_current_user_id
 
 
 def test_user_model_fields():
