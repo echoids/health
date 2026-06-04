@@ -1,3 +1,4 @@
+from app.common.auth import create_access_token
 from app.modules.user import service
 from app.modules.user.models import User
 
@@ -42,8 +43,18 @@ def test_login_endpoint(client, mocker):
     body = resp.json()
     assert body["code"] == 0
     assert body["data"]["access_token"]
+    assert body["data"]["refresh_token"]
 
 
 def test_me_endpoint_requires_auth(client):
     resp = client.get("/api/v1/user/me")
     assert resp.status_code == 401
+
+
+def test_me_endpoint_success(client):
+    token = create_access_token(user_id=99)
+    resp = client.get("/api/v1/user/me", headers={"Authorization": f"Bearer {token}"})
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["code"] == 0
+    assert body["data"]["user_id"] == 99
