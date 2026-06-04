@@ -37,4 +37,7 @@ def get_current_user_id(authorization: str | None = Header(default=None)) -> int
     payload = decode_token(token)
     if payload is None or payload.get("type") != "access":
         raise HTTPException(status_code=401, detail="认证失效")
-    return int(payload["sub"])
+    try:
+        return int(payload["sub"])
+    except (KeyError, ValueError, TypeError):
+        raise HTTPException(status_code=401, detail="认证失效")
