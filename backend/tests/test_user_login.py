@@ -1,5 +1,7 @@
 from app.modules.user import service
 from app.modules.user.models import User
+from app.modules.user.schemas import LoginRequest
+from app.common.auth import get_current_user_id
 
 
 def test_user_model_fields():
@@ -31,3 +33,19 @@ def test_login_reuses_existing_user(db_session, mocker):
     assert result["refresh_token"]
     count = db_session.query(User).filter_by(openid="oOLD999").count()
     assert count == 1
+
+
+def test_login_endpoint(client, mocker):
+    mocker.patch.object(
+        service, "wechat_code2session", return_value={"openid": "oHTTP1", "unionid": None}
+    )
+    resp = client.post("/api/v1/user/auth/login", json={"code": "test_code"})
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["code"] == 0
+    assert body["data"]["access_token"]
+
+
+def test_me_endpoint_requires_auth(client):
+    resp = client.get("/api/v1/user/me")
+    assert resp.status_code == 401
