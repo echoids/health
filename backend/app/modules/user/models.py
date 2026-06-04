@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import String, Boolean, DateTime, BigInteger
+from sqlalchemy import String, Boolean, DateTime, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 from app.common.database import Base
 
@@ -7,7 +7,7 @@ from app.common.database import Base
 class User(Base):
     __tablename__ = "users"
 
-    id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     openid: Mapped[str] = mapped_column(String(64), unique=True, index=True)
     unionid: Mapped[str | None] = mapped_column(String(64), nullable=True)
     nickname: Mapped[str | None] = mapped_column(String(64), nullable=True)
