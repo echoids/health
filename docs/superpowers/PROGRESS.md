@@ -20,7 +20,7 @@
 | 5 | JWT 工具 | ✅ 完成（1bebbd9） |
 | 6 | 微信登录 service | ✅ 完成（5c2a58b → 6e73f55 BigInteger variant → cd965db 测试强化） |
 | 7 | 鉴权依赖 get_current_user_id | ✅ 完成（87ed179 → 362273a 防御化修正） |
-| 8 | 用户路由与全链路集成 | ⬜ 待开始 |
+| 8 | 用户路由与全链路集成 | ✅ 完成（d2518f1 → 9beed84 → 854cc44；conftest 共享连接修复 SQLite 多线程） |
 | 9 | Docker Compose 与 Nginx | ⬜ 待开始 |
 
 ### 环境备注
@@ -48,7 +48,7 @@
 
 ### 接续点（最近一次中断）
 
-- **下一步：执行 Task 8（用户路由与全链路集成）**，计划文档已含完整代码与步骤。
+- **下一步：执行 Task 9（Docker Compose 与 Nginx）**，计划文档已含完整代码与步骤。注意：Task 9 含需本机 Docker 的人工验证步骤，本机若无 Docker 则只产出配置文件并提交，验证留待部署环境。
 - 执行方式：子代理驱动。每个 Task 流程 = 派实现子代理 → 规格审查 → 代码质量审查 → 修复 → 标记完成 → 更新本文件。
 - 环境：venv 在 `backend/.venv`，跑测试用 `backend/.venv/Scripts/python.exe -m pytest tests/ -v`（在 backend/ 目录下）。
 - Task 1 完成：aef9753 + 风格修复 04ce5d6；两阶段审查通过。
@@ -58,3 +58,4 @@
 - Task 5 完成：1bebbd9（JWT 签发/校验 / decode_token）；两阶段审查通过。
 - Task 6 完成：5c2a58b → 6e73f55（BigInteger.with_variant(Integer, sqlite) 修正）→ cd965db（import整理+断言強化）；两阶段审查通过。
 - Task 7 完成：87ed179 → 362273a（int(payload["sub"]) 防御化，500→401）；两阶段审查通过。
+- Task 8 完成：d2518f1（路由+集成）→ 9beed84（移除未用 import）→ 854cc44（补 /me happy-path + refresh_token 断言）；conftest 用共享连接修复 SQLite 多线程；两阶段审查通过。16 测试全过。
