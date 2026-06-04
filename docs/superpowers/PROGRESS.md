@@ -18,7 +18,7 @@
 | 3 | Alembic 迁移 | ✅ 完成（7b767a1，含 .gitignore 加 *.db） |
 | 4 | Redis 层 | ✅ 完成（92172ba） |
 | 5 | JWT 工具 | ✅ 完成（1bebbd9） |
-| 6 | 微信登录 service | ⬜ 待开始 |
+| 6 | 微信登录 service | ✅ 完成（5c2a58b → 6e73f55 BigInteger variant → cd965db 测试强化） |
 | 7 | 鉴权依赖 get_current_user_id | ⬜ 待开始 |
 | 8 | 用户路由与全链路集成 | ⬜ 待开始 |
 | 9 | Docker Compose 与 Nginx | ⬜ 待开始 |
@@ -48,7 +48,7 @@
 
 ### 接续点（最近一次中断）
 
-- **下一步：执行 Task 6（微信登录 service）**，计划文档已含完整代码与步骤。
+- **下一步：执行 Task 7（鉴权依赖 get_current_user_id）**，计划文档已含完整代码与步骤。
 - 执行方式：子代理驱动。每个 Task 流程 = 派实现子代理 → 规格审查 → 代码质量审查 → 修复 → 标记完成 → 更新本文件。
 - 环境：venv 在 `backend/.venv`，跑测试用 `backend/.venv/Scripts/python.exe -m pytest tests/ -v`（在 backend/ 目录下）。
 - Task 1 完成：aef9753 + 风格修复 04ce5d6；两阶段审查通过。
@@ -56,3 +56,4 @@
 - Task 3 完成：7b767a1（alembic init + env.py 接入 + users 建表迁移；本地 MySQL 未起，autogenerate 用临时 SQLite 生成，迁移用通用 sa.* 类型可移植）；两阶段审查通过。
 - Task 4 完成：92172ba（Redis 连接层，module-level pool + get_redis()）；两阶段审查通过。
 - Task 5 完成：1bebbd9（JWT 签发/校验 / decode_token）；两阶段审查通过。
+- Task 6 完成：5c2a58b → 6e73f55（BigInteger.with_variant(Integer, sqlite) 修正）→ cd965db（import整理+断言強化）；两阶段审查通过。
