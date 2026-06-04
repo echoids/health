@@ -15,7 +15,7 @@
 | 0 | 项目骨架与依赖 | ✅ 完成（d303e8b，含质量修复） |
 | 1 | 统一响应与异常处理 | ✅ 完成（aef9753 + 04ce5d6 风格修复） |
 | 2 | 数据库层与 User 模型 | ✅ 完成（3409a4d） |
-| 3 | Alembic 迁移 | ⬜ 待开始 |
+| 3 | Alembic 迁移 | ✅ 完成（7b767a1，含 .gitignore 加 *.db） |
 | 4 | Redis 层 | ⬜ 待开始 |
 | 5 | JWT 工具 | ⬜ 待开始 |
 | 6 | 微信登录 service | ⬜ 待开始 |
@@ -48,8 +48,9 @@
 
 ### 接续点（最近一次中断）
 
-- **下一步：执行 Task 3（Alembic 迁移）**，计划文档已含完整代码与步骤。
+- **下一步：执行 Task 4（Redis 层）**，计划文档已含完整代码与步骤。
 - 执行方式：子代理驱动。每个 Task 流程 = 派实现子代理 → 规格审查 → 代码质量审查 → 修复 → 标记完成 → 更新本文件。
 - 环境：venv 在 `backend/.venv`，跑测试用 `backend/.venv/Scripts/python.exe -m pytest tests/ -v`（在 backend/ 目录下）。
 - Task 1 完成：aef9753 + 风格修复 04ce5d6；两阶段审查通过。
 - Task 2 完成：3409a4d；两阶段审查通过。
+- Task 3 完成：7b767a1（alembic init + env.py 接入 + users 建表迁移；本地 MySQL 未起，autogenerate 用临时 SQLite 生成，迁移用通用 sa.* 类型可移植）；两阶段审查通过。

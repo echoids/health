@@ -28,5 +28,8 @@ dist/
 *.log
 .DS_Store
 
+# SQLite（仅本地 alembic autogenerate 临时库等）
+*.db
+
 # Superpowers 浏览器伴侣
 .superpowers/
