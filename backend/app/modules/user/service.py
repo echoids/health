@@ -2,7 +2,7 @@ import httpx
 from sqlalchemy.orm import Session
 from app.config import settings
 from app.common.exceptions import BusinessError
-from app.common.auth import create_access_token, create_refresh_token
+from app.common.auth import create_access_token, create_refresh_token, decode_token
 from app.modules.user.models import User
 
 WECHAT_URL = "https://api.weixin.qq.com/sns/jscode2session"
@@ -34,4 +34,15 @@ def login(db: Session, code: str) -> dict:
     return {
         "access_token": create_access_token(user.id),
         "refresh_token": create_refresh_token(user.id),
+    }
+
+
+def refresh(refresh_token: str) -> dict:
+    payload = decode_token(refresh_token)
+    if payload is None or payload.get("type") != "refresh":
+        raise BusinessError(40101, "登录已过期")
+    user_id = int(payload["sub"])
+    return {
+        "access_token": create_access_token(user_id),
+        "refresh_token": create_refresh_token(user_id),
     }

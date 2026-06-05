@@ -1,4 +1,4 @@
-from app.common.auth import create_access_token
+from app.common.auth import create_access_token, create_refresh_token
 from app.modules.user import service
 from app.modules.user.models import User
 
@@ -58,3 +58,46 @@ def test_me_endpoint_success(client):
     body = resp.json()
     assert body["code"] == 0
     assert body["data"]["user_id"] == 99
+
+
+def test_refresh_success():
+    refresh_token = create_refresh_token(user_id=7)
+    result = service.refresh(refresh_token)
+    assert result["access_token"]
+    assert result["refresh_token"]
+
+
+def test_refresh_rejects_access_token():
+    from app.common.exceptions import BusinessError
+    access_token = create_access_token(user_id=7)
+    try:
+        service.refresh(access_token)
+        assert False, "应抛 BusinessError"
+    except BusinessError as e:
+        assert e.code == 40101
+
+
+def test_refresh_rejects_garbage():
+    from app.common.exceptions import BusinessError
+    try:
+        service.refresh("garbage.token.value")
+        assert False, "应抛 BusinessError"
+    except BusinessError as e:
+        assert e.code == 40101
+
+
+def test_refresh_endpoint(client):
+    refresh_token = create_refresh_token(user_id=7)
+    resp = client.post("/api/v1/user/auth/refresh", json={"refresh_token": refresh_token})
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["code"] == 0
+    assert body["data"]["access_token"]
+    assert body["data"]["refresh_token"]
+
+
+def test_refresh_endpoint_rejects_garbage(client):
+    resp = client.post("/api/v1/user/auth/refresh", json={"refresh_token": "garbage"})
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["code"] == 40101
