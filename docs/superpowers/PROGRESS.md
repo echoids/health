@@ -21,7 +21,7 @@
 | 6 | 微信登录 service | ✅ 完成（5c2a58b → 6e73f55 BigInteger variant → cd965db 测试强化） |
 | 7 | 鉴权依赖 get_current_user_id | ✅ 完成（87ed179 → 362273a 防御化修正） |
 | 8 | 用户路由与全链路集成 | ✅ 完成（d2518f1 → 9beed84 → 854cc44；conftest 共享连接修复 SQLite 多线程） |
-| 9 | Docker Compose 与 Nginx | ⬜ 待开始 |
+| 9 | Docker Compose 与 Nginx | ✅ 完成（03e9182；.dockerignore 追加；`docker compose config` 検証通過） |
 
 ### 环境备注
 
@@ -58,4 +58,5 @@
 - Task 5 完成：1bebbd9（JWT 签发/校验 / decode_token）；两阶段审查通过。
 - Task 6 完成：5c2a58b → 6e73f55（BigInteger.with_variant(Integer, sqlite) 修正）→ cd965db（import整理+断言強化）；两阶段审查通过。
 - Task 7 完成：87ed179 → 362273a（int(payload["sub"]) 防御化，500→401）；两阶段审查通过。
-- Task 8 完成：d2518f1（路由+集成）→ 9beed84（移除未用 import）→ 854cc44（补 /me happy-path + refresh_token 断言）；conftest 用共享连接修复 SQLite 多线程；两阶段审查通过。16 测试全过。
+- Task 8 完成：d2518f1（路由+集成）→ 9beed84（移除未用 import）→ 854cc44（补 /me happy-path + refresh_token 断言）；conftest 共享连接修复 SQLite 多线程；两阶段审查通过。
+- Task 9 完成：03e9182（Dockerfile、docker-compose.yml、nginx.conf、.dockerignore）；`docker compose config` 语法验证通过；临时 .env 已删除。16 测试全过。
