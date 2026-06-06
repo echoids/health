@@ -41,7 +41,10 @@ def refresh(refresh_token: str) -> dict:
     payload = decode_token(refresh_token)
     if payload is None or payload.get("type") != "refresh":
         raise BusinessError(40101, "登录已过期")
-    user_id = int(payload["sub"])
+    try:
+        user_id = int(payload["sub"])
+    except (KeyError, ValueError, TypeError):
+        raise BusinessError(40101, "登录已过期")
     return {
         "access_token": create_access_token(user_id),
         "refresh_token": create_refresh_token(user_id),
