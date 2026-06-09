@@ -1,0 +1,13 @@
+dist/
+deploy_versions/
+.temp/
+.rn_temp/
+node_modules/
+.DS_Store
+.swc
+*.local
+
+# Taro 构建环境标识文件（仅注释模板，无密钥）。根 .gitignore 的 .env.* 规则会忽略它们，这里放行以保持脚手架完整。
+!.env.development
+!.env.production
+!.env.test
