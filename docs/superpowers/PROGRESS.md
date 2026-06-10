@@ -15,13 +15,21 @@
 |---|---|---|
 | 1 | 后端 token 刷新接口 | ✅ 完成（c801cdf → 5b88b2b 防御化；21 测试通过） |
 | 2 | Taro 项目初始化 | ✅ 完成（6eccebd；React+TS+Sass，build:weapp 通过，AppID 已填） |
-| 3 | NutUI + 常量与存储工具 | ⬜ 待开始 |
-| 4 | 网络请求封装 | ⬜ 待开始 |
-| 5 | 用户 API service | ⬜ 待开始 |
-| 6 | 登录态 Context | ⬜ 待开始 |
-| 7 | 首页 + 我的页 + tabBar | ⬜ 待开始 |
-| 8 | app 入口 + 启动恢复登录态 | ⬜ 待开始 |
-| 9 | 微信开发者工具手动验证 | ⬜ 待开始 |
+| 3 | NutUI + 常量与存储工具 | ✅ 完成（269677b） |
+| 4 | 网络请求封装 | ✅ 完成（a3a3736；token 注入 + 401 自动刷新 + 防刷新风暴） |
+| 5 | 用户 API service | ✅ 完成（b6861fd；login/getMe/wxLoginCode） |
+| 6 | 登录态 Context | ✅ 完成（e2ee9f3；AuthProvider + useAuth） |
+| 7 | 首页 + 我的页 + tabBar | ✅ 完成（提交于 Task7；2 Tab 纯文字 tabBar） |
+| 8 | app 入口 + 启动恢复登录态 | ✅ 完成（00be036；app.ts→app.tsx 改 JSX 入口） |
+| 9 | 微信开发者工具手动验证 | ⬜ 待人工执行（需本机微信开发者工具 + 后端在跑） |
+
+### 环境/实现备注（前端脚手架）
+- Taro v4.2.0；Node v24.14.0；npm install 用 npmmirror 镜像（官方源 ECONNRESET）。
+- `taro init` 交互 prompt 在非 TTY 下崩溃 → 用 `winpty` 分配伪终端；flag 值首字母大写（`--css Sass --npm Npm`）。
+- Taro 在 frontend/ 自动 git init → 已删嵌套 .git。
+- 根 .gitignore 的 .env.* 挡了 Taro 的 .env.development/production/test（仅注释模板）→ frontend/.gitignore 加否定规则放行。
+- CLI 入口为 app.ts，Task 8 因需 JSX 改名 app.tsx（Taro 自动识别）。
+- 页面配置用 definePageConfig、app 配置用 defineAppConfig（CLI 全局注入，无需 import）。
 
 ---
 
